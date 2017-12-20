@@ -13,7 +13,7 @@ const createRouter = (getState, dispatch) => {
             <Route path='/' component={App}>
                 <IndexRoute component={ListCollections}/>
                 <Route path='/edit/:id' component={EditCollection}/>
-                <Route path='/get/:id' component={SingleCollection}/>
+                <Route path='/show/:id' component={SingleCollection}/>
 
 
             </Route>

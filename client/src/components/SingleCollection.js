@@ -8,14 +8,16 @@ import { bindActionCreators } from 'redux';
 class CollectionsList extends Component {
   constructor(props) {
     super(props);
-    this.getNewPageNew = this.getNewPageNew.bind(this);
   }
 
   componentWillMount() {
-    this.props.actions.loadCollectionById(this.props.params.id);
+    this.props.actions.loadSingleCollection(this.props.params.id);
+    this.props.actions.loadBooks();
   }
 
   render() {
+    const {Collections}=this.props
+    console.log(Collections.singleCollection)
     return (
       <div className="container">
         <div className="row">
@@ -26,7 +28,7 @@ class CollectionsList extends Component {
                   Back to Collections List
                 </button>
               </Link>
-              ><Link to={'/edit/:id'.replace(':id', this.props.params.id)}>
+              <Link to={'/edit/:id'.replace(':id', this.props.params.id)}>
                 <button className="btn btn-primary">Edit collection</button>
               </Link>
             </div>
@@ -35,15 +37,51 @@ class CollectionsList extends Component {
 
         <div className="row">
           <div className="col-lg-12">
-            {this.props.Invoices.invoices.length > 0
-              ? <div className="row">
-                  <div className="col-md-6">
-                    <label className="form-label">Label</label>
-                    <h4>
-                      {this.props.Collection.id}
-                    </h4>
-                  </div>
+            {Collections.singleCollection
+              ? <div>
+                <div className="row">
+                <div className="col-md-6">
+                  <label className="form-label">Name</label>
+                  <h4>
+                    {Collections.singleCollection.name}
+                  </h4>
                 </div>
+                <div className="col-md-6">
+                  <label className="form-label">Description</label>
+                  <h4>
+                    {Collections.singleCollection.description}
+                  </h4>
+                </div>
+              </div>
+                <div className="row">
+                <div className="col-md-12">
+                  <label className="form-label">Books</label>
+                  <h4>
+                    {Collections.singleCollection&&Collections.singleCollection.books.length>0?
+                      <table className="table table-hover table-striped table-condensed">
+                      <thead>
+                        <tr>
+
+                          <th>Name</th>
+                          <th>Price</th>
+                          <th>Author</th>
+                          <th>Rating</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                      {Collections.singleCollection.books.map(item=>{
+                      return <tr>
+                        <td>{item.name}</td>
+                        <td>{item.price}</td>
+                        <td>{item.author}</td>
+                        <td>{item.rating}</td>
+                      </tr>
+                    })}</tbody></table>:null}
+                  </h4>
+                </div>
+                </div>
+              </div>
               : <h2>Empty</h2>}
           </div>
         </div>
@@ -54,7 +92,7 @@ class CollectionsList extends Component {
 
 function mapStateToProps(state) {
   return {
-    Invoices: state.Collections
+    Collections: state.Collections
   };
 }
 

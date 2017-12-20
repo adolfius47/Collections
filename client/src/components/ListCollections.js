@@ -21,6 +21,16 @@ class Collections extends Component {
   componentWillMount() {
     this.props.actions.loadCollections();
   }
+  componentWillReceiveProps(next){
+    if(next.Collections.flagBook===true){
+      this.openModalCreateBook()
+      this.props.actions.putFlagCloseModalCreateBook(false)
+    }
+    if(next.Collections.flagCollection===true){
+      this.openModalCreateCollection()
+      this.props.actions.putFlagCloseModalCreateCollection(false)
+    }
+  }
 	openModalCreateBook(){
 		this.setState({isModalCreateBookOpen:!this.state.isModalCreateBookOpen})
 	}
@@ -28,10 +38,12 @@ class Collections extends Component {
 		this.setState({isModalCreateCollectionOpen:!this.state.isModalCreateCollectionOpen})
 	}
   render() {
+
+    const {Collections}=this.props
     return (
       <div className="container">
         <div>
-          
+
             <button className="btn btn-primary" onClick={this.openModalCreateCollection}>Add New Collection</button>
             <button className="btn btn-primary" onClick={this.openModalCreateBook}>Add New Book</button>
 
@@ -39,7 +51,7 @@ class Collections extends Component {
 
         <div className="row">
           <div className="col-lg-12">
-            {this.props.Collections.collections.length > 0
+            {Collections.collections.length > 0
               ? <div className="table-scrollable">
                   <table className="table table-hover table-striped table-condensed">
                     <thead>
@@ -47,16 +59,16 @@ class Collections extends Component {
                         <th />
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Books</th>
+                        {/* <th>Books</th> */}
                       </tr>
                     </thead>
 
                     <tbody>
-                      {this.props.Collections.collections.map((item, key) => {
+                      {Collections.collections.map((item, key) => {
                         return (
                           <tr key={key}>
                             <td>
-                              <Link to={'/show/:id'.replace(':id', item.id)}>
+                              <Link to={'/show/:id'.replace(':id', item._id)}>
                                 <button className="btn btn-default yellow">
                                   Display Collection
                                 </button>
@@ -68,17 +80,18 @@ class Collections extends Component {
                             <td>
                               {item.description}
                             </td>
-                            <td>
+                            {/* <td>
                               <ul>
                                 {item.books.map(book => {
+                                  console.log(book)
                                   return (
                                     <li>
-                                      {book.name}
+                                      {book}
                                     </li>
                                   );
                                 })}
                               </ul>
-                            </td>
+                            </td> */}
                           </tr>
                         );
                       })}
@@ -86,8 +99,10 @@ class Collections extends Component {
                   </table>
                 </div>
               : <h2>Empty</h2>}
-							<CreateBook modalIsOpen={this.state.isModalCreateBookOpen} closeModal={this.openModalCreateBook}/>
-							<CreateCollection modalIsOpen={this.state.isModalCreateCollectionOpen} closeModal={this.openModalCreateCollection}/>
+							<CreateBook modalIsOpen={this.state.isModalCreateBookOpen}
+               closeModal={this.openModalCreateBook}/>
+							<CreateCollection modalIsOpen={this.state.isModalCreateCollectionOpen} 
+              closeModal={this.openModalCreateCollection}/>
 
           </div>
         </div>

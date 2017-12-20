@@ -46,7 +46,7 @@ class CreateBook extends Component {
           price: this.state.price,
           mark: this.state.markForBook
         })
-      
+      this.props.actions.putFlagCloseModalCreateBook(true)
       this.setState({
         valueNewPost: '',
         userForNewPost: '',
@@ -62,7 +62,7 @@ class CreateBook extends Component {
 
     if (this.state.errors) {
       errorsInForm = (
-        <div className="all-data__errors">
+        <div style={{color:"red"}}>
           <h3>Write data correctly</h3>
         </div>
       );

@@ -6,16 +6,19 @@ import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
 
 import reducers from './reducers';
+import createSagaMiddleware from "redux-saga";
 
+import sagas from "./sagas";
 
 let middleWares = [promise(), thunk];
-if (process.env.NODE_ENV !== 'production') {
     middleWares.push(createLogger())
-}
 
-const middleware = applyMiddleware(...middleWares)
+const sagaMiddleware = createSagaMiddleware();
+
+const middleware = applyMiddleware(...middleWares,sagaMiddleware)
 
 const store = createStore(reducers, middleware)
+sagaMiddleware.run(sagas)
 
 
 

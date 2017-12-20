@@ -32,6 +32,8 @@
 					name:this.state.name,
 					description:this.state.description,
 				})
+			this.props.actions.putFlagCloseModalCreateCollection(true)
+
 			this.setState({
 				name:'',
 				description:'',
