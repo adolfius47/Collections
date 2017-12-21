@@ -83,9 +83,9 @@ class Collections extends Component {
                             </td>
                             {/* <td>
                               <ul>
-                                {item.books.map(book => {
+                                {item.books.map((book,key) => {
                                   return (
-                                    <li>
+                                    <li key={key}>
                                       {book}
                                     </li>
                                   );

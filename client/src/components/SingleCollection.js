@@ -67,8 +67,8 @@ class CollectionsList extends Component {
                       </thead>
 
                       <tbody>
-                      {Collections.singleCollection.books.map(item=>{
-                      return <tr>
+                      {Collections.singleCollection.books.map((item,key)=>{
+                      return <tr key={key}>
                         <td>{item.name}</td>
                         <td>{item.price}</td>
                         <td>{item.author}</td>

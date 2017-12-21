@@ -1,7 +1,5 @@
-"use strict";
 import {put, takeEvery} from "redux-saga/effects";
 import * as types from "../actions";
-import {hashHistory} from "react-router";
 import * as actions from "../actions/actions";
 
 

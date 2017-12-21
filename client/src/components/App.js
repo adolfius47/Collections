@@ -4,7 +4,7 @@ class App extends Component {
   render() {
     let dropDown, access;
     document.title = 'Collections';
-    if (this.props.location.pathname == '/') {
+    if (this.props.location.pathname === '/') {
       dropDown = (
         <div className="row">
           <div className="col-lg-12">

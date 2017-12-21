@@ -98,7 +98,7 @@ class EditCollection extends Component {
 		}):[]
 		let filteredBooksForAdd=books.filter(item=>{
 
-			if(booksByIDForAdd.indexOf(item._id)==-1){
+			if(booksByIDForAdd.indexOf(item._id)===-1){
 			return true}		})
     return (
       <div className="container">
