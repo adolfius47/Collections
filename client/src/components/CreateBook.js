@@ -8,11 +8,7 @@ import { bindActionCreators } from 'redux'
 class CreateBook extends Component {
   constructor(props) {
     super(props);
-    this.addNewBook = this.addNewBook.bind(this);
-    this.handlerName = this.handlerName.bind(this);
-    this.handlerGetAuthor = this.handlerGetAuthor.bind(this);
-    this.handlerGetPrice = this.handlerGetPrice.bind(this);
-    this.handlerGetMark = this.handlerGetMark.bind(this);
+
 
     this.state = {
       name: '',
@@ -22,19 +18,19 @@ class CreateBook extends Component {
       errors: false
     };
   }
-  handlerName(e) {
+  handlerName=(e)=> {
     this.setState({ name: e.target.value });
   }
-  handlerGetAuthor(e) {
+  handlerGetAuthor=(e)=> {
     this.setState({ author: e.target.value });
   }
-  handlerGetPrice(e) {
+  handlerGetPrice=(e)=> {
     this.setState({ price: e.target.value });
   }
-  handlerGetMark(e) {
+  handlerGetMark=(e)=> {
     this.setState({ markForBook: e });
   }
-  addNewBook() {
+  addNewBook=() =>{
     if (
       this.state.name.length > 0 &&
       this.state.author.length > 2 &&
@@ -62,7 +58,7 @@ class CreateBook extends Component {
 
     if (this.state.errors) {
       errorsInForm = (
-        <div style={{color:"red"}}>
+        <div className="red">
           <h3>Write data correctly</h3>
         </div>
       );
@@ -79,7 +75,7 @@ class CreateBook extends Component {
     ];
     return (<Modal
                 onRequestClose={this.props.closeModal}
-
+                ariaHideApp={false}
                 isOpen={this.props.modalIsOpen}
             >
               <div className="close-button text-right">

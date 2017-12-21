@@ -7,9 +7,7 @@
 	class CreateCollection extends Component {
 		constructor(props){
 			super(props)
-			this.handlerGetDescription=this.handlerGetDescription.bind(this)
-			this.handlerName=this.handlerName.bind(this)
-			this.addNewCollection=this.addNewCollection.bind(this)
+
 
 
 			this.state={
@@ -19,14 +17,14 @@
 				errors:false,
 			}
 		}
-		handlerName(e){
+		handlerName=(e)=>{
 				this.setState({name:e.target.value})
 		}
-		handlerGetDescription(e){
+		handlerGetDescription=(e)=>{
 				this.setState({description:e.target.value})
 		}
 
-		addNewCollection(){
+		addNewCollection=()=>{
 			if(this.state.name.length>0&&this.state.description.length>2){
 				this.props.actions.AddCollection({
 					name:this.state.name,
@@ -50,18 +48,18 @@
 
 
 			if(this.state.errors){
-				errorsInForm=<div className="all-data__errors"><h3>Write data correctly</h3></div>
+				errorsInForm=<div className="red"><h3>Write data correctly</h3></div>
 			}else{
 				errorsInForm=null
 			}
 
 			return <Modal
                   onRequestClose={this.props.closeModal}
-
+                  ariaHideApp={false}
                   isOpen={this.props.modalIsOpen}
               >
                 <div className="close-button">
-					<div className="form-group">
+					<div className="form-group text-right">
 
                       {/*<h4 className="modal-title">Купити відео</h4>*/}
                       <button type="button" onClick={this.props.closeModal} className="close-form"

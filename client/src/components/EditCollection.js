@@ -8,12 +8,7 @@ import { bindActionCreators } from 'redux';
 class EditCollection extends Component {
   constructor(props) {
     super(props);
-    this.handlerGetDescription = this.handlerGetDescription.bind(this);
-    this.handlerName = this.handlerName.bind(this);
-    this.handlerChangeRating = this.handlerChangeRating.bind(this);
-    this.handlerAddBookToCollection = this.handlerAddBookToCollection.bind(this);
-    this.handlerSaveData = this.handlerSaveData.bind(this);
-    this.handlerRemoveBookFromCollection = this.handlerRemoveBookFromCollection.bind(this);
+
 
     this.state = {
       name: '',
@@ -37,14 +32,14 @@ class EditCollection extends Component {
       });
     }
   }
-  handlerName(e) {
+  handlerName=(e) =>{
     this.setState({ name: e.target.value });
   }
-  handlerGetDescription(e) {
+  handlerGetDescription=(e)=> {
     this.setState({ description: e.target.value });
   }
 
-  handlerSaveData() {
+  handlerSaveData=()=> {
     if (this.state.name.length > 0 && this.state.description.length > 2) {
       this.props.actions.putCollection(this.props.params.id,{
         name: this.state.name,
@@ -60,20 +55,20 @@ class EditCollection extends Component {
     }
   }
 
-  handlerChangeRating(id, item, e) {
+  handlerChangeRating=(id, item, e)=> {
 
     this.props.actions.setRating(id, e.value);
     item.rating=e.value
     this.props.actions.putBook(id, item);
   }
-  handlerAddBookToCollection(id) {
+  handlerAddBookToCollection=(id)=> {
     let data={
 			bookId:id
 		}
 
     this.props.actions.AddBookToCollection(this.props.params.id, data);
   }
-  handlerRemoveBookFromCollection(id){
+  handlerRemoveBookFromCollection=(id)=>{
 
 
     this.props.actions.RemoveBookFromCollection(this.props.params.id, id);
@@ -110,11 +105,13 @@ class EditCollection extends Component {
         <div className="row">
           <div className="col-md-12">
             {errorsInForm}
+            <div className="form-group">
             <Link to="/">
               <button className="btn btn-default">
                 Back to Collections List
               </button>
             </Link>
+            </div>
           </div>
         </div>
         <div className="row">
@@ -248,9 +245,10 @@ class EditCollection extends Component {
                   </table>
                 : null}
             </div>
-            <div className="form-group">
+            <div className="form-group text-right">
               <button
-                className="btn btn-primary"
+                className="btn btn-primary yellow"
+
                 onClick={this.handlerSaveData}
                 type="button"
               >

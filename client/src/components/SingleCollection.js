@@ -6,9 +6,7 @@ import { bindActionCreators } from 'redux';
 
 
 class CollectionsList extends Component {
-  constructor(props) {
-    super(props);
-  }
+  
 
   componentWillMount() {
     this.props.actions.loadSingleCollection(this.props.params.id);
@@ -17,7 +15,6 @@ class CollectionsList extends Component {
 
   render() {
     const {Collections}=this.props
-    console.log(Collections.singleCollection)
     return (
       <div className="container">
         <div className="row">

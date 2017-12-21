@@ -9,8 +9,6 @@ import CreateCollection from './CreateCollection'
 class Collections extends Component {
   constructor(props) {
     super(props);
-		this.openModalCreateBook = this.openModalCreateBook.bind(this);
-		this.openModalCreateCollection = this.openModalCreateCollection.bind(this);
 
 		this.state={
 			isModalCreateBookOpen:false,
@@ -24,17 +22,19 @@ class Collections extends Component {
   componentWillReceiveProps(next){
     if(next.Collections.flagBook===true){
       this.openModalCreateBook()
+      alert("Book is created")
       this.props.actions.putFlagCloseModalCreateBook(false)
     }
     if(next.Collections.flagCollection===true){
       this.openModalCreateCollection()
+      alert("Collection is created")
       this.props.actions.putFlagCloseModalCreateCollection(false)
     }
   }
-	openModalCreateBook(){
+	openModalCreateBook=()=>{
 		this.setState({isModalCreateBookOpen:!this.state.isModalCreateBookOpen})
 	}
-	openModalCreateCollection(){
+	openModalCreateCollection=()=>{
 		this.setState({isModalCreateCollectionOpen:!this.state.isModalCreateCollectionOpen})
 	}
   render() {
@@ -43,10 +43,11 @@ class Collections extends Component {
     return (
       <div className="container">
         <div>
-
-            <button className="btn btn-primary" onClick={this.openModalCreateCollection}>Add New Collection</button>
+            <div className="form-group">
+            <button className="btn btn-primary margin" onClick={this.openModalCreateCollection}>Add New Collection</button>
+            
             <button className="btn btn-primary" onClick={this.openModalCreateBook}>Add New Book</button>
-
+            </div>
         </div>
 
         <div className="row">
@@ -57,7 +58,7 @@ class Collections extends Component {
                     <thead>
                       <tr>
                         <th />
-                        <th>Name</th>
+                        <th width="20%">Name</th>
                         <th>Description</th>
                         {/* <th>Books</th> */}
                       </tr>
@@ -69,7 +70,7 @@ class Collections extends Component {
                           <tr key={key}>
                             <td>
                               <Link to={'/show/:id'.replace(':id', item._id)}>
-                                <button className="btn btn-default yellow">
+                                <button className="btn btn-primary yellow">
                                   Display Collection
                                 </button>
                               </Link>
@@ -83,7 +84,6 @@ class Collections extends Component {
                             {/* <td>
                               <ul>
                                 {item.books.map(book => {
-                                  console.log(book)
                                   return (
                                     <li>
                                       {book}

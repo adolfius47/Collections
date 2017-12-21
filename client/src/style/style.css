@@ -1,0 +1,20 @@
+.red{
+	padding: 0 20px;
+	color:#B22222;
+}
+th:hover{
+	cursor:pointer;
+}
+.yellow{
+	background: #DAA520;
+	color:#FAF0E6	;
+}
+.yellow:hover{
+	background: grey;
+}
+.yellow:active{
+	background: white;
+}
+.margin{
+	margin-right:20px; 
+}

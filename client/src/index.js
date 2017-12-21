@@ -4,7 +4,7 @@ import {render} from 'react-dom'
 import store from './store'
 import Routing from './router'
 import 'react-select/dist/react-select.css';
-import './style/style.scss'
+import './style/style.css'
 
 const id = 'root'
 const app = document.getElementById(id)
